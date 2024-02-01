@@ -23,6 +23,7 @@ async function createUserTable() {
                     Name NVARCHAR(255) NOT NULL
                 )
             `);
+        return "Done Table Creation!";
     } catch (err) {
         console.error('Create Table Failed: ' + err);
     }
@@ -64,6 +65,7 @@ async function addUsers(user) {
                 INSERT INTO master.dbo.Users (UID, Name)
                 VALUES (@uid, @name)
             `)
+        return 'Successfully added a user!';
     } catch (err) {
         console.error('Add data in Users Table Failed: ' + err);
     }

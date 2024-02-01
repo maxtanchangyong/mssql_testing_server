@@ -35,6 +35,12 @@ router.route('/users').get((req, res, next) => {
     });
 });
 
+router.route('/users/createTable').get((req, res, next) => {
+    operations.createUserTable().then((data) => {
+        res.json(data);
+    });
+});
+
 router.route('/users/:uid').get((req, res, next) => {
     operations.getUsers(req.params.uid).then((data) => {
         res.json(data[0]);
