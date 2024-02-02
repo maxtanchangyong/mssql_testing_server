@@ -78,9 +78,8 @@ router.route('/users/updateUser').put((req, res, next) => {
 });
 
 // ---------- DELETE ----------
-router.route('/users/deleteUser').delete((req, res, next) => {
-    let user = { ...req.body };
-    operations.deleteUser(user.uid).then((data) => {
+router.route('/users/:uid').delete((req, res, next) => {
+    operations.deleteUser(req.params.uid).then((data) => {
         res.status(201).json(data);
     });
 });
