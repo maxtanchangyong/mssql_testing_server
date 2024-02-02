@@ -34,7 +34,7 @@ async function getAllUsers() {
         const pool = await connectToDatabase;
         const result = await pool
             .request()
-            .query('SELECT * FROM master.dbo.Users');
+            .query('SELECT Uid, Name FROM master.dbo.Users');
         return result.recordsets;
     } catch (err) {
         console.error('Get All Users Failed: ' + err);
@@ -84,11 +84,45 @@ async function usersVerification(uid) {
     }
 }
 
+async function updateUser(uid, oldName, newName) {
+    try {
+        const pool = await connectToDatabase;
+        await pool
+            .request()
+            .input('uid', sql.NVarChar, uid)
+            .input('oldName', sql.NVarChar, oldName)
+            .input('newName', sql.NVarChar, newName)
+            .query(`
+                UPDATE master.dbo.Users
+                SET Name=@newName
+                WHERE UID=@uid AND Name=@oldName
+            `);
+        return [`Successfully update user ${uid}`]
+    } catch (err) {
+        console.error('Update User Information Failed: ' + err);
+    }
+}
+
+async function deleteUser(uid) {
+    try {
+        const pool = await connectToDatabase;
+        await pool
+            .request()
+            .input('uid', sql.NVarChar, uid)
+            .query('DELETE FROM master.dbo.Users WHERE UID=@uid');
+        return `Succesfully Deleted User ${uid}`;
+    } catch (err) {
+        console.error('Delete User Failed: ' + err);
+    }
+}
+
 module.exports = {
     testConnection: testConnection,
     createUserTable: createUserTable,
     getAllUsers: getAllUsers,
     getUsers: getUsers,
     addUsers: addUsers,
-    userVerification: usersVerification
+    userVerification: usersVerification,
+    updateUser: updateUser,
+    deleteUser: deleteUser
 }

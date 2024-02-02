@@ -69,6 +69,22 @@ router.route('/users/:uid').post((req, res, next) => {
     });
 });
 
+// ---------- PUT ----------
+router.route('/users/updateUser').put((req, res, next) => {
+    let user = { ...req.body };
+    operations.updateUser(user.uid, user.oldName, user.newName).then((data) => {
+        res.status(201).json(data);
+    });
+});
+
+// ---------- DELETE ----------
+router.route('/users/deleteUser').delete((req, res, next) => {
+    let user = { ...req.body };
+    operations.deleteUser(user.uid).then((data) => {
+        res.status(201).json(data);
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });
