@@ -71,8 +71,8 @@ router.route('/users/:uid').post((req, res, next) => {
 
 // ---------- PUT ----------
 router.route('/users/updateUser').put((req, res, next) => {
-    let user = { ...req.body };
-    operations.updateUser(user.uid, user.oldName, user.newName).then((data) => {
+    let updateInfo = { ...req.body };
+    operations.updateUser(updateInfo).then((data) => {
         res.status(201).json(data);
     });
 });

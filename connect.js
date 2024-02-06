@@ -1,30 +1,30 @@
 const sql = require('mssql/msnodesqlv8');
 
 // PC
-const pool = new sql.ConnectionPool({
-    database: 'master',
-    port: 60543,
-    server: 'DESKTOP-ACFD4QG',
-    user: 'DESKTOP-ACFD4QG\\maxta',
-    password: '',
-    driver: 'msnodesqlv8',
-    options: {
-        trustedConnection: true
-    }
-});
-
-// Laptop
 // const pool = new sql.ConnectionPool({
 //     database: 'master',
 //     port: 60543,
-//     server: 'DESKTOP-1NI2IDN',
-//     user: 'DESKTOP-1NI2IDN\\Forge-15 1650',
+//     server: 'DESKTOP-ACFD4QG',
+//     user: 'DESKTOP-ACFD4QG\\maxta',
 //     password: '',
 //     driver: 'msnodesqlv8',
 //     options: {
 //         trustedConnection: true
 //     }
 // });
+
+// Laptop
+const pool = new sql.ConnectionPool({
+    database: 'master',
+    port: 60543,
+    server: 'DESKTOP-1NI2IDN',
+    user: 'DESKTOP-1NI2IDN\\Forge-15 1650',
+    password: '',
+    driver: 'msnodesqlv8',
+    options: {
+        trustedConnection: true
+    }
+});
 
 async function connectToDatabase() {
     try {

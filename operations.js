@@ -84,20 +84,20 @@ async function usersVerification(uid) {
     }
 }
 
-async function updateUser(uid, oldName, newName) {
+async function updateUser(updateInfo) {
     try {
         const pool = await connectToDatabase;
         await pool
             .request()
-            .input('uid', sql.NVarChar, uid)
-            .input('oldName', sql.NVarChar, oldName)
-            .input('newName', sql.NVarChar, newName)
+            .input('uid', sql.NVarChar, updateInfo.uid)
+            .input('oldName', sql.NVarChar, updateInfo.oldName)
+            .input('newName', sql.NVarChar, updateInfo.newName)
             .query(`
                 UPDATE master.dbo.Users
                 SET Name=@newName
                 WHERE UID=@uid AND Name=@oldName
             `);
-        return [`Successfully update user ${uid}`]
+        return [`Successfully update user ${updateInfo.uid}`]
     } catch (err) {
         console.error('Update User Information Failed: ' + err);
     }
