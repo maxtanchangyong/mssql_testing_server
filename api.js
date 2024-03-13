@@ -6,7 +6,7 @@ const cors = require('cors');
 
 let users = require('./user');
 let cors_options = {
-    origin: "http://localhost:4200"
+    origin: "https://angular17-nodejs-sql.web.app"
 };
 
 let port = process.env.PORT || 8090;
