@@ -15,7 +15,7 @@ let cors_options = {
 //     origin: "http://localhost:4200"
 // };
 
-let port = process.env.PORT || 8090;
+let port = process.env.PORT || 8080;
 
 app.use(cors(cors_options));
 app.use(express.json());

@@ -1,4 +1,4 @@
-const sql = require('mssql/msnodesqlv8');
+const sql = require('mssql');
 
 // PC
 // const pool = new sql.ConnectionPool({
@@ -39,7 +39,7 @@ async function connectToDatabase() {
     }
 }
 
-// module.exports = connectToDatabase();
+module.exports = connectToDatabase();
 
 // PCS mssql testing server
 // var Connection = require('tedious').Connection;
@@ -84,7 +84,7 @@ async function connectToDatabase() {
 // }
 
 // Initialize the connection.
-module.exports = connectToDatabase();
+// module.exports = connectToDatabase();
 
 
 // const { Sequelize } = require('sequelize');
