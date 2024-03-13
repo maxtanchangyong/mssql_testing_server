@@ -14,68 +14,74 @@ const sql = require('mssql/msnodesqlv8');
 // });
 
 // Laptop
-// const pool = new sql.ConnectionPool({
-//     database: 'master',
-//     port: 60543,
-//     server: 'DESKTOP-1NI2IDN',
-//     user: 'DESKTOP-1NI2IDN\\Forge-15 1650',
-//     password: '',
-//     driver: 'msnodesqlv8',
-//     options: {
-//         trustedConnection: true
-//     }
-// });
+const pool = new sql.ConnectionPool({
+    database: 'master',
+    port: 1433,
+    server: '10.88.29.193',
+    user: 'sa',
+    password: 'q8st%6a5!g2mj',
+    driver: "msnodesqlv8",
+    authentication: {
+        type: "default"
+    },
+    options: {
+        trustServerCertificate: true
+    }
+});
 
-// async function connectToDatabase() {
-//     try {
-//         await pool.connect();
-//         console.log("Connected!");
-//         return pool;
-//     } catch (err) {
-//         console.log("Connection to Database Failed!: " + err);
-//     }
-// }
+async function connectToDatabase() {
+    try {
+        await pool.connect();
+        console.log("Connected!");
+        return pool;
+    } catch (err) {
+        console.log("Connection to Database Failed!: " + err);
+    }
+}
 
 // module.exports = connectToDatabase();
 
 // PCS mssql testing server
-var Connection = require('tedious').Connection;
+// var Connection = require('tedious').Connection;
 
-var config = {
-    server: "10.88.29.193", // or "localhost"
-    options: {
-        trustServerCertificate: true
-    },
-    authentication: {
-        type: "default",
-        options: {
-            userName: "sa",
-            password: "q8st%6a5!g2mj",
-        }
-    }
-};
+// var config = {
+//     server: "10.88.29.193", // or "localhost"
+//     options: {
+//         trustServerCertificate: true
+//     },
+//     authentication: {
+//         type: "default",
+//         options: {
+//             userName: "sa",
+//             password: "q8st%6a5!g2mj",
+//         }
+//     }
+// };
 
-var connection = new Connection(config);
+// var connection = new Connection(config);
 
-async function connectToDatabase() {
-    // Setup event handler when the connection is established. 
-    // await connection.on('connect', (err) => {
-    //     if (err) {
-    //         console.log('Error: ', err)
-    //     }
-    //     // If no error, then good to go...
-    //     console.log("connected!");
-    //     return connection;
-    // });
+// async function connectToDatabase() {
+//     // Setup event handler when the connection is established. 
+//     // await connection.on('connect', (err) => {
+//     //     if (err) {
+//     //         console.log('Error: ', err)
+//     //     }
+//     //     // If no error, then good to go...
+//     //     console.log("connected!");
+//     //     return connection;
+//     // });
 
-    try {
-        await connection.on('connect', ()=> { });
-        console.log("connected!");
-        return connection;
-    } catch (err) {
-        console.log("Connection Failed!: " + err);
-    }
-}
+//     try {
+//         await connection.on('connect', (err)=> {
+//             if (err) {
+//                 console.error(err);
+//             }
+//             return connection;
+//         });
+//     } catch (err) {
+//         console.log("Connection Failed!: " + err);
+//     }
+// }
 
 // Initialize the connection.
 module.exports = connectToDatabase();

@@ -1,6 +1,8 @@
 const connectToDatabase = require('./connect');
 const sql = require('mssql/msnodesqlv8');
 
+// let Request = require('tedious').Request;
+
 async function testConnection() {
     try {
         const pool = await connectToDatabase;
@@ -9,6 +11,23 @@ async function testConnection() {
         console.error("Impossible will appear this error: " + err);
     }
 };
+
+async function checkTableExist() {
+    try {
+        const pool = await connectToDatabase;
+        const result = await pool
+            .request()
+            .query(`
+                SELECT CAST(COUNT(*) AS BIT)
+                FROM INFORMATION_SCHEMA.TABLES
+                WHERE TABLE_SCHEMA = 'dbo'
+                AND TABLE_NAME = 'Users'
+            `);
+        return result.recordsets;
+    } catch (err) {
+        console.error('Check User Table Exist Function Failed: ' + err);
+    }
+}
 
 async function createUserTable() {
     try {
@@ -118,6 +137,7 @@ async function deleteUser(uid) {
 
 module.exports = {
     testConnection: testConnection,
+    checkTableExist: checkTableExist,
     createUserTable: createUserTable,
     getAllUsers: getAllUsers,
     getUsers: getUsers,
