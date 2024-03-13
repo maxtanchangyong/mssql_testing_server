@@ -20,7 +20,7 @@ const pool = new sql.ConnectionPool({
     server: '10.88.29.193',
     user: 'sa',
     password: 'q8st%6a5!g2mj',
-    driver: "msnodesqlv8",
+    driver: "{ODBC Driver 17 for SQL Server}",
     authentication: {
         type: "default"
     },
